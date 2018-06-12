@@ -1,6 +1,7 @@
 import { Component, OnInit, EventEmitter, Input, Output } from '@angular/core';
 import * as _ from 'lodash';
 
+// TODO: Import all of this depending of what's in the input
 // Models
 import { Device } from '../../shared/model/device.model';
 import { DeviceGroup } from '../../shared/model/device-group.model';
@@ -75,7 +76,7 @@ export class OmniboxComponent implements OnInit {
      *
      * @memberof OmniboxComponent
      */
-    modelMap = [
+    @Input() modelMap = [
         {
             model: DeviceGroup,
             map: [
@@ -386,7 +387,7 @@ export class OmniboxComponent implements OnInit {
             const filterTypes = Object.keys(this.activeCriteria);
 
             // Iterate over all types found in the criteria
-            let rawTypeResults = [];
+            const rawTypeResults = [];
             filterTypes.forEach(type => {
                 // console.log('CURRENT TYPE OF CRITERION: ' + type);
 
@@ -405,7 +406,7 @@ export class OmniboxComponent implements OnInit {
                             // console.log('CURRENT VALUE OF CRITERION: ' + value);
 
                             // Iterate over all elements
-                            let valueMatches = cleanElements.filter((element) => {
+                            const valueMatches = cleanElements.filter((element) => {
                                 // console.log('CURRENT ELEMENT: ', element[field]);
                                 if (!_.isEmpty(element[field])) {
                                     if (typeof (element[field]) === 'string') {
