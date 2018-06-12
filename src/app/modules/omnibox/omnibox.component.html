@@ -1,0 +1,32 @@
+<div class="form-group">
+    <div class="row container-fluid">
+        <div class="col">
+            <input type="text" class="form-control omnibox-input" #omniBoxInput placeholder="Saisissez votre recherche" (click)="$event.stopPropagation(); omniBoxDrop.open();" [(ngModel)]="currentCriterion" (keydown.enter)="addCriterion()" (keyup)="adaptSearch()">
+            <p class="help-text text-muted">Les critères sont cumulatifs au sein d'un même type (ex: equipement, groupe...). Les résultats finaux sont l'intersection de tous les résultats fournis par les différents types</p>
+            <div ngbDropdown #omniBoxDrop="ngbDropdown">
+                <div ngbDropdownMenu class="omnibox-helper col-10">
+                    <div class="helper-title py-2">
+                        <span class="text-uppercase">Critères de recherche</span>
+                    </div>
+                    <div class="container helper-options">
+                        <div class="criteria-list" *ngIf="step === 'select'">
+                            <div *ngFor="let type of availableCriteriaTypes" class="row criterion-item py-1" (click)="$event.stopPropagation(); selectCriterion(type.name); omniBoxInput.focus();">
+                                <span>{{ type.name }}:</span> <span class="helper-type pl-1"> {{ type.helpText }}</span>
+                            </div>
+                        </div>
+                        <div class="criteria-completion" *ngIf="step === 'fill'">
+                            <div *ngFor="let value of availableValues" class="row choice-item py-1" (click)="fillCriterion(value); omniBoxInput.focus();">
+                                <span>{{ value }}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="active-criteria">
+                Critères actifs: <span *ngFor="let criterion of displayCriteria" class="active-criterion p-1">{{ criterion }} <i class="fa fa-times" title="Supprimer ce critère" (click)="removeCriterion(criterion)"></i></span>
+            </div>
+        </div>
+    </div>
+</div>

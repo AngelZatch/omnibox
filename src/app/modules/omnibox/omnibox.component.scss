@@ -1,0 +1,36 @@
+@import "../../../imports.scss";
+.omnibox-helper {
+    padding: 20px;
+    .helper-title {
+        color: $filter-text;
+        font-size: pxtorem(13px);
+    }
+    .criterion-item,
+    .choice-item {
+        cursor: pointer;
+        &:hover {
+            background-color: lighten($filter-text, 30%);
+        }
+    }
+    .helper-options {
+        max-height: 300px;
+        overflow-y: scroll;
+    }
+}
+
+.helper-type {
+    color: $filter-text;
+}
+
+.form-group>input {
+    margin-bottom: 10px;
+}
+
+.active-criterion {
+    background-color: lighten($active-background, 15%);
+    border: 1px solid $agiom-main;
+    border-radius: .3rem;
+    .fa {
+        cursor: pointer;
+    }
+}
